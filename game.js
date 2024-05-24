@@ -18,6 +18,7 @@ class Game {
 
     this.renderTiles();
     this.renderPlayer();
+    this.renderEnemies();
     this.renderProducts();
   }
 
@@ -34,13 +35,12 @@ class Game {
 
   tick() {
     this.player.move();
-    this.renderPlayer();
-    // console.debug(player.toString());
-
     for (let enemy of this.enemies) {
       enemy.move();
-      console.log(enemy.toString());
     }
+
+    this.renderPlayer();
+    this.renderEnemies();
 
     if (this.running) {
       window.requestAnimationFrame(this.tick);
@@ -77,12 +77,14 @@ class Game {
   }
 
   renderPlayer() {
-    const pos = this.player.pos;
-    const div = this.player.element;
-    div.style.top = `${pos.y * TILE_SIZE}px`;
-    div.style.left = `${pos.x * TILE_SIZE}px`;
+    this.player.render();
   }
 
+  renderEnemies() {
+    for (let enemy of this.enemies) {
+      enemy.render();
+    }
+  }
 
   renderProducts() {
     for (let tile of this.productMap.items.values()) {

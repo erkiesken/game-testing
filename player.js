@@ -20,6 +20,11 @@ class Hero {
     this.target = new Pos(x, y);
   }
 
+  render() {
+    this.element.style.top = `${this.pos.y * TILE_SIZE}px`;
+    this.element.style.left = `${this.pos.x * TILE_SIZE}px`;
+  }
+
   move() {
     if (this.pos.x != this.target.x) {
       this.pos.x += this.speed * Math.sign(this.target.x - this.pos.x);
