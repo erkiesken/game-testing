@@ -1,7 +1,7 @@
 const TILE_SIZE = 50;
 
 class Game {
-  constructor(player, tiles, products, input) {
+  constructor(player, tiles, products, enemies, input) {
     // state
     this.running = false;
 
@@ -10,6 +10,7 @@ class Game {
     this.tileMap = tiles;
     this.input = input;
     this.productMap = products;
+    this.enemies = enemies;
 
     this.element = document.querySelector("#grid");
 
@@ -35,6 +36,11 @@ class Game {
     this.player.move();
     this.renderPlayer();
     // console.debug(player.toString());
+
+    for (let enemy of this.enemies) {
+      enemy.move();
+      console.log(enemy.toString());
+    }
 
     if (this.running) {
       window.requestAnimationFrame(this.tick);
@@ -91,6 +97,8 @@ class Game {
   }
 }
 
-const game = new Game(player, tiles, products, input);
+const enemies = [enemy1, enemy2];
+
+const game = new Game(player, tiles, products, enemies, input);
 
 game.start();
