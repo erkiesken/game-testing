@@ -97,7 +97,7 @@ function findPath(graph, start, end) {
   }
 
   const queue = [start];
-  const visited = new Set(start);
+  const visited = new Set();
   const predecessor = new Map();
   const result = [];
 
@@ -127,7 +127,9 @@ function findPath(graph, start, end) {
         // Remember where we came to visit each vertex from
         predecessor.set(neighbour, vertex);
       }
-      queue.push(neighbour);
+      if (!visited.has(neighbour)) {
+        queue.push(neighbour);
+      }
     }
   }
 
